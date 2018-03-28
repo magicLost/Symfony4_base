@@ -1,0 +1,12 @@
+html, body{
+    background-color: #000000;
+}
+
+.navbar{
+    background-color: rgba(255, 246, 176, 0.51);
+}
+
+.main{
+    background: rgba(254, 255, 201, 0.51);
+    min-height: 600px;
+}

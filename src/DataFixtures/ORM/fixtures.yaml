@@ -1,0 +1,15 @@
+App\Entity\Admin\User:
+  user_{1..10}:
+    name: <userName()>
+    realName: <name()>
+    email: <email()>
+    sex: <gender()>
+    bornAt: <dateTimeBetween('-54 years', '-18 years')>
+    isBan: <boolean()>
+
+App\Entity\Admin\Car:
+  car_{1..10}:
+    model: <carModel()>
+    country: <country()>
+    madeAt: <dateTimeBetween('-14 years', '-6 months')>
+
