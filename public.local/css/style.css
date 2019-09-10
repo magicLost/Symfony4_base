@@ -1,12 +1,9 @@
-html, body{
-    background-color: #000000;
+body{
+    background-image: url('/image/back.jpg');
+    color: #dee0c1;
 }
 
-.navbar{
-    background-color: rgba(255, 246, 176, 0.51);
-}
-
-.main{
-    background: rgba(254, 255, 201, 0.51);
-    min-height: 600px;
+.wrapper{
+    background: rgba(0, 0, 0, 0.50);
+    padding-top: 90px;
 }

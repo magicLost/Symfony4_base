@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <style rel="stylesheet" type="text/css">
+        a:hover{
+            text-decoration: none;
+        }
+    </style>
+
+{% endblock stylesheets %}
+
+{% block main %}
+
+
+
+    <div class="row">
+
+        <div class="col-sm-12 text-center"><h4>{{ title }} {{ car.id }}</h4></div>
+
+        <div class="col">
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <ul class="list-group bg-dark">
+
+                        <li class="list-group-item bg-dark">Model - {{ car.model }}</li>
+                        <li class="list-group-item bg-dark">Country - {{ car.country }}</li>
+                        <li class="list-group-item bg-dark">Made - {{ car.madeAt|date("Y") }}</li>
+
+                    </ul>
+                </div>
+
+                {% if car.userCar|length > 0 %}
+
+                    <div class="col-sm-12"><h5 class="text-center">Users who is have this car model:</h5></div>
+
+                {% endif %}
+
+                {% for userCar in car.userCar %}
+                    <div class="col">
+                        <a href="{{ path("admin_show_user", {
+                            'id': userCar.user.id
+                        }) }}" class="text-info" >
+                            <ul class="list-group bg-dark">
+
+                                <li class="list-group-item bg-dark">Name - {{ userCar.user.name }}</li>
+                                <li class="list-group-item bg-dark">Email - {{ userCar.user.email }}</li>
+                                <li class="list-group-item bg-dark">Years - {{ userCar.years }}</li>
+
+                            </ul>
+                        </a>
+
+                    </div>
+                {% endfor %}
+            </div>
+
+
+        </div>
+    </div>
+
+{% endblock %}

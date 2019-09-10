@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% import "admin/macros.html.twig" as macros %}
+
+{% block main %}
+
+    <div class="row">
+        <div class="col-12">
+            <h5 class="text-center">Registration</h5>
+        </div>
+        <div class="col-12">
+
+            {{ form_start(register_form, {
+                'attr': {
+                    'class': 'text-success'
+                }
+            }) }}
+
+            <div class="form-group">
+                {{ form_errors(register_form) }}
+            </div>
+
+            {{ macros.print_form_row(register_form.email) }}
+            {{ macros.print_form_row(register_form.plainPassword.first) }}
+            {{ macros.print_form_row(register_form.plainPassword.second) }}
+
+
+            <button type="submit" class="btn btn-info btn-block mt-2" formnovalidate>Register</button>
+
+            {{ form_end(register_form) }}
+
+
+        </div>
+    </div>
+
+{% endblock %}

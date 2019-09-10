@@ -2,17 +2,21 @@
 
 {% block title %}{{ title }}{% endblock %}
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+{% block main %}
 
-<div class="example-wrapper">
+    <div class="row">
+        <div class="col">
+            <h1 class="text-center">
+                Именно так.
+            </h1>
 
-    <h1>
-        Welcome to the main page!
-    </h1>
+            <img class="img-fluid" src="{{ asset("image/Medved.jpg") }}" alt="Zloy medved">
 
-</div>
+            <p class="text-center">
+                Выглядит лицо человека, когда он взял себе два пироженных, а потом пришел начальник и одно забрал себе.
+            </p>
+        </div>
+    </div>
+
+
 {% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <style rel="stylesheet" type="text/css">
+        a:hover{
+            text-decoration: none;
+        }
+    </style>
+
+{% endblock stylesheets %}
+
+{% block main %}
+
+
+
+    <div class="row">
+        <div class="col-sm-12">
+            <h5 class="text-center">Do you really want to delete {{ user.name }} with real name {{ user.realName }} from database?</h5>
+        </div>
+        <div class="col-sm-12">
+            <form action="" method="post">
+                <div class="form-group">
+                    <div class="col-sm-6 mx-auto mt-3">
+                        <input type="submit" class="btn btn-danger btn-block" name="confirm" value="Yes" />
+                        <input type="submit" class="btn btn-success btn-block" name="confirm" value="No" />
+                    </div>
+
+                </div>
+            </form>
+        </div>
+
+
+    </div>
+
+{% endblock %}

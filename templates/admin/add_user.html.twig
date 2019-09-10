@@ -1,0 +1,129 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block stylesheets %}
+
+    {{ parent() }}
+
+    <style type="text/css">
+        .card{
+            background: rgba(0,0,0,0.26);
+        }
+    </style>
+
+{% endblock stylesheets %}
+
+{% import "admin/macros.html.twig" as macros %}
+
+{% block main %}
+
+    <div class="row">
+
+        <div class="col-sm-12">
+            <h4 class="text-center pb-3">
+                {{ title }}
+            </h4>
+        </div>
+
+    <div class="col-sm-12">
+        {{ form_start(user_form, {
+            'attr': {
+                'class': 'text-success'
+                }
+            }) }}
+
+            <div class="form-group">
+                {{ form_errors(user_form) }}
+            </div>
+
+            {{ macros.print_form_row(user_form.name) }}
+            {{ macros.print_form_row(user_form.realName) }}
+            {{ macros.print_form_row(user_form.email) }}
+            {{ macros.print_form_row(user_form.sex) }}
+            {{ macros.print_form_row(user_form.bornAt) }}
+            {{ macros.print_form_row(user_form.isBan) }}
+
+
+        {# userCar field #}
+
+        <div class="row data-wrapper"
+             data-prototype="{{ macros.echo_embed_form_user(user_form.userCar.vars.prototype)|e('html_attr') }}"
+             data-index="{{ user_form.userCar|length }}"
+        >
+            <h5 class="col-lg-12 text-center text-info">Cars: </h5>
+
+
+            {% for user_car_form in user_form.userCar %}
+                {{ macros.echo_embed_form_user(user_car_form) }}
+            {% endfor %}
+
+
+            <div class="col-lg-12">
+
+                  <button class="add_company btn btn-success w-25 mx-auto">Add car</button>
+
+            </div>
+
+        </div>
+
+        {# end userCar field #}
+
+        <button type="submit" class="btn btn-info btn-block mt-2" formnovalidate>Add user</button>
+
+        {# prevent vierd labels #}
+        {{ form_widget(user_form.userCar) }}
+
+        {{ form_end(user_form) }}
+
+    </div>
+
+{% endblock %}
+
+
+{% block javascripts %}
+
+    {{ parent() }}
+    <script type="text/javascript">
+        $(function(){
+            //const buttons_delete = $('button.delete_company');
+            /*buttons_delete.on('click', function(event){
+                event.preventDefault();
+                $(this).parent().remove();
+            });*/
+
+            const button_add = $('button.add_company');
+
+            button_add.on('click', function(event){
+                event.preventDefault();
+
+                const data_wrapper = $('div.data-wrapper');
+
+                // Get the data-prototype explained earlier
+                const prototype = data_wrapper.data('prototype');
+
+                // get the new index
+                const index = data_wrapper.data('index');
+
+                var newForm = prototype;
+
+                newForm = newForm.replace(/__name__/g, index);
+
+                data_wrapper.data('index', index + 1);
+
+                data_wrapper.children().last().before(newForm);
+
+                //find delete button and add delete function
+                const button_delete = data_wrapper.find('button.delete_company').last();
+                console.log(button_delete);
+                button_delete.on('click', function(event) {
+                    event.preventDefault();
+                    $(this).parent().parent().remove();
+                })
+                //console.log(newForm);
+            });
+        });
+    </script>
+
+
+{% endblock javascripts %}

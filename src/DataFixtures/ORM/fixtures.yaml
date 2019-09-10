@@ -1,5 +1,5 @@
 App\Entity\Admin\User:
-  user_{1..10}:
+  users_{1..10}:
     name: <userName()>
     realName: <name()>
     email: <email()>
@@ -8,8 +8,19 @@ App\Entity\Admin\User:
     isBan: <boolean()>
 
 App\Entity\Admin\Car:
-  car_{1..10}:
+  cars_{1..10}:
     model: <carModel()>
     country: <country()>
     madeAt: <dateTimeBetween('-14 years', '-6 months')>
 
+App\Entity\Admin\UserCar:
+  user_car_{1..15}:
+    user: '@users_*'
+    car: '@cars_*'
+    years: <numberBetween(1, 25)>
+
+App\Entity\Security\User:
+    user_{1..10}:
+        email: 'hello+<current()>\@gmail.com'
+        plainPassword: 13
+        roles: ['ROLE_ADMIN']

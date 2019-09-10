@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% import "admin/macros.html.twig" as macros %}
+
+{% block main %}
+
+    <div class="row">
+        <div class="col-12">
+            <h5 class="text-center">Login</h5>
+        </div>
+        <div class="col-12">
+
+            {% if error %}
+                <div class="alert alert-danger">
+                    {{ error.messageKey|trans(error.messageData, 'security') }}
+                </div>
+            {% endif %}
+
+
+            {{ form_start(form, {
+                'attr': {
+                    'class': 'text-success'
+                }
+            }) }}
+
+            <div class="form-group">
+                {{ form_errors(form) }}
+            </div>
+
+            {{ macros.print_form_row(form._username) }}
+            {{ macros.print_form_row(form._password) }}
+
+
+            <button type="submit" class="btn btn-info btn-block mt-2" formnovalidate>Login</button>
+
+
+            {{ form_end(form) }}
+
+            <a href="{{ path("security_register") }}">Registration</a>
+
+        </div>
+    </div>
+
+
+
+{% endblock %}

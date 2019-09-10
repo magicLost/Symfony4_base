@@ -1,24 +1,43 @@
 security:
+
+    encoders:
+        App\Entity\Security\User: bcrypt
+
+    role_hierarchy:
+        ROLE_ADMIN: ['ROLE_MANAGER', 'ROLE_ALLOWED_TO_SWITCH']
+
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        in_memory: { memory: ~ }
+        #in_memory: { memory: ~ }
+        your_db_provider:
+            entity:
+                class: App\Entity\Security\User
+                property: email
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             anonymous: true
+            guard:
+                authenticators:
+                    - App\Security\LoginFormAuthenticator
 
+            logout:
+                path: /logout
+
+            switch_user: ~
             # activate different ways to authenticate
 
             # http_basic: true
             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
 
-            # form_login: true
+            form_login:
+                csrf_token_generator: security.csrf.token_manager
             # https://symfony.com/doc/current/security/form_login_setup.html
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
+        # - { path: ^/admin, roles: ROLE_ADMIN, requires_channel: https }
         # - { path: ^/profile, roles: ROLE_USER }

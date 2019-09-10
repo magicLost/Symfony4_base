@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <style rel="stylesheet" type="text/css">
+        a:hover{
+            text-decoration: none;
+        }
+    </style>
+
+{% endblock stylesheets %}
+
+{% block main %}
+
+
+
+    <div class="row">
+
+        <div class="col-sm-12 text-center"><h4>{{ title }} {{ user.name }}</h4></div>
+
+        <div class="col">
+
+            <div class="row">
+                <div class="col-sm-12 m-2">
+                    <a href="" class="btn btn-success w-25">Edit</a>{#path("admin_user_edit")#}
+                    <a href="{{ path('admin_delete_user', {'id':user.id}) }}" class="btn btn-danger w-25 float-right">Delete</a>
+                </div>
+                
+                <div class="col-sm-12">
+                    <ul class="list-group bg-dark">
+
+                        <li class="list-group-item bg-dark">Real name - {{ user.realName }}</li>
+                        <li class="list-group-item bg-dark">Email - {{ user.email }}</li>
+                        <li class="list-group-item bg-dark">Gender - {{ user.sex }}</li>
+                        <li class="list-group-item bg-dark">Born - {{ user.bornAt|date("Y,m d") }}</li>
+                        <li class="list-group-item bg-dark">
+                            {% if user.isBan %}
+                                Ban - yes
+                            {% else %}
+                                Ban - no
+                            {% endif %}
+                        </li>
+
+                    </ul>
+                </div>
+
+                {% if user.userCar|length > 0 %}
+
+                    <div class="col-sm-12"><h5 class="text-center">Have {{ user.userCar|length }} car(s):</h5></div>
+
+                {% endif %}
+
+                {% for userCar in user.userCar %}
+                    <div class="col">
+                        <a href="{{ path("admin_show_car", {
+                            'id': userCar.car.id
+                        }) }}" class="text-info" >
+                            <ul class="list-group bg-dark">
+
+                                <li class="list-group-item bg-dark">Model - {{ userCar.car.model }}</li>
+                                <li class="list-group-item bg-dark">Country - {{ userCar.car.country }}</li>
+                                <li class="list-group-item bg-dark">Made - {{ userCar.car.madeAt|date("Y,m d") }}</li>
+                                <li class="list-group-item bg-dark">Years - {{ userCar.years }}</li>
+
+                            </ul>
+                        </a>
+
+                    </div>
+                {% endfor %}
+            </div>
+
+
+        </div>
+    </div>
+
+{% endblock %}
